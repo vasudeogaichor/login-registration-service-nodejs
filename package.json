@@ -2,9 +2,10 @@
   "name": "login-registration-service-nodejs",
   "version": "1.0.0",
   "description": "This app aims to provide all possible functionality regarding user login and registration",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/app.js"
   },
   "author": "",
   "license": "ISC",
