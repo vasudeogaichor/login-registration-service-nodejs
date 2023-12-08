@@ -1,9 +1,9 @@
 const userLogin = require('./userLogin');
-const userPasswordReset = require('./userPasswordReset');
+const userRequestResetToken = require('./userRequestResetToken');
 const userRegister = require('./userRegister');
 
 module.exports = {
     userLogin,
-    userPasswordReset,
+    userRequestResetToken,
     userRegister
 }
