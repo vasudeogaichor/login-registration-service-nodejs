@@ -1,13 +1,15 @@
 version: '3'
 services:
-  web:
-    build: .
-    ports:
-      - "3000:3000"
-    environment:
-      MONGO_URI: "mongodb://mongo:27017/db_auth"
-    depends_on:
-      - mongo
+  # web:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     MONGO_URI: "mongodb://mongo:27017/db_auth"
+  #   depends_on:
+  #     - mongo
 
   mongo:
     image: "mongo:latest"
