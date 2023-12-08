@@ -13,13 +13,11 @@ module.exports = async function userRegister(req, res, next) {
     }
 
     if (!isStrongPassword(password)) {
-      return res
-        .status(400)
-        .json({
-          error:
-            "Password should contain at least one uppercase character," +
-            "one lowercase character, one digit, one special character and must have at least 8 characters.",
-        });
+      return res.status(400).json({
+        error:
+          "Password should contain at least one uppercase character," +
+          "one lowercase character, one digit, one special character and must have at least 8 characters.",
+      });
     }
 
     // Create a new user
@@ -29,7 +27,16 @@ module.exports = async function userRegister(req, res, next) {
     await newUser.save();
 
     // Respond with a success message
-    res.status(201).json({ message: "User registered successfully." });
+    res
+      .status(201)
+      .json({
+        message: "User registered successfully.",
+        result: {
+          userId: newUser._id,
+          username: newUser.username,
+          email: newUser.email,
+        },
+      });
   } catch (error) {
     console.error("Error during registration:", error);
     res.status(500).json({ error: "Internal Server Error" });
