@@ -9,12 +9,12 @@ module.exports = async function userRegister(req, res, next) {
     if (existingUser) {
       return res
         .status(400)
-        .json({ error: "Username or email is already in use." });
+        .json({ Error: "Username or email is already in use." });
     }
 
     if (!isStrongPassword(password)) {
       return res.status(400).json({
-        error:
+        Error:
           "Password should contain at least one uppercase character," +
           "one lowercase character, one digit, one special character and must have at least 8 characters.",
       });
@@ -31,7 +31,7 @@ module.exports = async function userRegister(req, res, next) {
       .status(201)
       .json({
         message: "User registered successfully.",
-        result: {
+        data: {
           userId: newUser._id,
           username: newUser.username,
           email: newUser.email,
@@ -39,7 +39,7 @@ module.exports = async function userRegister(req, res, next) {
       });
   } catch (error) {
     console.error("Error during registration:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ Error: "Internal Server Error" });
   }
 };
 
