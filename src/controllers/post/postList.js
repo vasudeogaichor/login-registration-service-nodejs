@@ -2,7 +2,6 @@ const Post = require("../../models/Post");
 
 module.exports = async function postList(req, res, next) {
   try {
-    console.log(req.params);
     const { page, limit } = req.params;
 
     const defaultPage = 1;
