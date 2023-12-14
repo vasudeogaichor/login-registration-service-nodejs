@@ -58,7 +58,7 @@ module.exports = async function postList(req, res, next) {
 
     res.status(200).json({
       message: "Posts fetched successfully",
-      total: limit,
+      total: posts.length,
       actualTotal: totalPosts,
       data: posts.map((post) => {
         return {
