@@ -33,7 +33,7 @@ module.exports = async function userRequestResetToken(req, res, next) {
       return;
     }
 
-    res.json({ message: "Password reset token sent." });
+    res.status(201).json({ message: "Password reset token sent." });
   } catch (error) {
     console.error("Error during password reset request:", error);
     res.status(500).json({ error: "Internal Server Error" });

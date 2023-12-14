@@ -39,7 +39,7 @@ module.exports = async function userRequestResetToken(req, res, next) {
 
     await user.save();
 
-    res.json({ message: "Password reset successfully." });
+    res.status(201).json({ message: "Password reset successfully." });
   } catch (error) {
     console.error("Error during password reset:", error);
     res.status(500).json({ Externalrror: "Internal Server Error" });

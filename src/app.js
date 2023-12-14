@@ -1,13 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const authRoutes = require('./routes/authRoutes');
+const { postRouter, authRouter } = require('./routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
-app.use('/', authRoutes);
+
+app.use('/posts', postRouter);
+app.use('/auth', authRouter);
 
 mongoose.connect('mongodb://localhost:27017/db_auth');
 
