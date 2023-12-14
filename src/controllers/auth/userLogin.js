@@ -18,7 +18,7 @@ module.exports = async function userLogin(req, res, next) {
 
     // If the passwords match, the login is successful
     if (isPasswordValid) {
-      return res.json({
+      return res.status(200).json({
         data: {
           userId: user._id,
           username: user.username,
