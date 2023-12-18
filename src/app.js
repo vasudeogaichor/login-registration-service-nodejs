@@ -2,14 +2,16 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { postRouter, authRouter } = require('./routes');
+const {verifyToken} = require('./middleware/authMiddleware')
 
 const app = express();
 const PORT = process.env.PORT || 3002;
 
 app.use(bodyParser.json());
 
-app.use('/posts', postRouter);
 app.use('/auth', authRouter);
+app.use(verifyToken)
+app.use('/posts', postRouter);
 
 mongoose.connect('mongodb://localhost:27017/db_auth');
 
