@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../../models/User");
+const { createNewToken } = require("../../middleware/authMiddleware");
 
 module.exports = async function userLogin(req, res, next) {
   const { username, password } = req.body;
@@ -18,11 +19,14 @@ module.exports = async function userLogin(req, res, next) {
 
     // If the passwords match, the login is successful
     if (isPasswordValid) {
+      const token = createNewToken(user);
+
       return res.status(200).json({
         data: {
           userId: user._id,
           username: user.username,
           email: user.email,
+          token: token,
         },
         message: "Login successful.",
       });

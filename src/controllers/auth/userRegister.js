@@ -8,9 +8,9 @@ module.exports = async function userRegister(req, res, next) {
     // Check if the username or email is already in use
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
-      return res
-        .status(400)
-        .json({ Error: "Username or email is already in use." });
+      return res.status(400).json({
+        Error: "Username or email is already in use.",
+      });
     }
 
     if (!isStrongPassword(password)) {
