@@ -20,8 +20,11 @@ This Node.js project provides authentication and social media post functionaliti
     ```bash
     GMAIL_APP_PASSWORD={your_gmail_app_key}
     PORT=3002
+    ENCRYPT_KEY="{your_cipher_key}"
+    ENCRYPT_IV="{your_cipher_iv}"
     ```
-    Kindly refer to [this](https://blog.logrocket.com/sending-emails-node-js-nodemailer/#:~:text=Nodemailer%20is%20an%20excellent%20tool,the%20users%20of%20your%20application.) link for getting your gmail app key.
+    Kindly refer to [this](https://blog.logrocket.com/sending-emails-node-js-nodemailer/#:~:text=Nodemailer%20is%20an%20excellent%20tool,the%20users%20of%20your%20application.) link for getting your gmail app key.<br>
+    Run `node src/scripts/generateEncryptionParams.js` to generate unique values for `ENCRYPT_KEY` and `ENCRYPT_IV` variables
 5. Start the Node.js server:
     ```bash
     npm run start
