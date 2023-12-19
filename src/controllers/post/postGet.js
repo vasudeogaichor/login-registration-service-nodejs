@@ -5,8 +5,7 @@ module.exports = async function postCreate(req, res, next) {
     const { postId } = req.params;
 
     const post = await Post.findById(postId);
-
-    res.status(200).json({
+    res.locals.json = {
       message: "Post fetched successfully",
       data: {
         postId: post._id,
@@ -15,8 +14,11 @@ module.exports = async function postCreate(req, res, next) {
         likes: post.likes,
         comments: post.comments,
       },
-    });
+    };
+    res.status(200);
   } catch (error) {
     res.status(500).json({ Error: "Internal Server Error" });
   }
+
+  next();
 };
