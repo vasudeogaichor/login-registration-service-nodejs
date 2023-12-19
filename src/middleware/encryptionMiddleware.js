@@ -1,18 +1,15 @@
 const crypto = require("crypto");
+const KEY = process.env.ENCRYPT_KEY;
+const IV = process.env.ENCRYPT_IV;
 
 function encryptResponseData(req, res, next) {
   const json = res.locals.json;
-  console.log("json - ", json);
-  const key = crypto.randomBytes(32);
-  console.log("key - ", key);
-  const iv = crypto.randomBytes(16); // Initialization Vector
-  console.log("iv - ", iv);
+  const key = Buffer.from(KEY, "base64");
+  const iv = Buffer.from(IV, "base64"); // Initialization Vector
 
   const cipher = crypto.createCipheriv("aes-256-cbc", key, iv);
   let encryptedData = cipher.update(JSON.stringify(json), "utf-8", "hex");
-  console.log("encryptedData - ", encryptedData);
   encryptedData += cipher.final("hex");
-  console.log("encryptedData - ", encryptedData);
   res.locals.encryptedResponse = { encryptedData };
   next();
 }
