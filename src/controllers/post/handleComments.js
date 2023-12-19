@@ -10,6 +10,11 @@ module.exports = async function handleComments(req, res, next) {
 
     const { userId, text, action, commentId } = req.body;
 
+    const loggedInUser = req.user;
+    if (loggedInUser.userId !== userId) {
+      return res.status(500).json({ Error: "User id mismatch with logged in user" });
+    }
+
     if (action === "add") {
       post.comments.push({ userId, text });
       await post.save();

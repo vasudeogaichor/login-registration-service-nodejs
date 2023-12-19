@@ -5,6 +5,13 @@ module.exports = async function handleLikes(req, res, next) {
     const { postId } = req.params;
     const { userId, action } = req.body;
 
+    const loggedInUser = req.user;
+    if (loggedInUser.userId !== userId) {
+      return res
+        .status(500)
+        .json({ Error: "User id mismatch with logged in user" });
+    }
+
     const post = await Post.findById(postId);
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
@@ -46,8 +53,8 @@ module.exports = async function handleLikes(req, res, next) {
       }
 
       return res.status(400).json({
-        message: "Error: Like already removed/ does not exist"
-      })
+        message: "Error: Like already removed/ does not exist",
+      });
     } else {
       return res.status(400).json({
         message: "Error: Wrong action type or userId missing",

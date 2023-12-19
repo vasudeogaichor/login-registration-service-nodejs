@@ -2,9 +2,12 @@ const Post = require("../../models/Post");
 
 module.exports = async function postCreate(req, res, next) {
   const { userId, content } = req.body;
+  const loggedInUser = req.user;
+  if (loggedInUser.userId !== userId) {
+    return res.status(500).json({ Error: "User id mismatch with logged in user" });
+  }
 
   try {
-
     // Create a new post
     const post = new Post({ userId, content });
 
