@@ -12,51 +12,54 @@ module.exports = async function postList(req, res, next) {
 
     skip = (page - 1) * limit;
 
-    const filters = {}
+    const filters = {};
 
     // return posts by specific user
     if (userId) {
-        filters.userId = userId
+      filters.userId = userId;
     }
 
     // search posts using content text
     if (query?.trim()?.length) {
-        filters.content = { $regex: query, $options: "i" };
+      filters.content = { $regex: query, $options: "i" };
     }
 
-    const sortOptions = {}
+    const sortOptions = {};
 
     if (sortBy) {
-        let direction = 1;
-        // Direction of sort order decided by the - at the start of sortBy type
-        if (sortBy.startsWith("-")) {
-            direction = -1
-            sortBy = sortBy.slice(1)
-        }
-
-        switch (sortBy) {
-          case "likes":
-            sortOptions.likes = direction;
-            break;
-          case "comments":
-            sortOptions.comments = direction;
-            break;
-          case "createdAt":
-            sortOptions.createdAt = direction;
-            break;
-          default:
-            // Handle other cases or invalid sortBy values
-            break;
-        }
-      } else {
-        // Default sorting (e.g., by createdAt)
-        sortOptions.createdAt = -1;
+      let direction = 1;
+      // Direction of sort order decided by the - at the start of sortBy type
+      if (sortBy.startsWith("-")) {
+        direction = -1;
+        sortBy = sortBy.slice(1);
       }
 
-    const posts = await Post.find(filters).skip(skip).limit(limit).sort(sortOptions);
+      switch (sortBy) {
+        case "likes":
+          sortOptions.likes = direction;
+          break;
+        case "comments":
+          sortOptions.comments = direction;
+          break;
+        case "createdAt":
+          sortOptions.createdAt = direction;
+          break;
+        default:
+          // Handle other cases or invalid sortBy values
+          break;
+      }
+    } else {
+      // Default sorting (e.g., by createdAt)
+      sortOptions.createdAt = -1;
+    }
+
+    const posts = await Post.find(filters)
+      .skip(skip)
+      .limit(limit)
+      .sort(sortOptions);
     const totalPosts = await Post.countDocuments();
 
-    res.status(200).json({
+    res.locals.json = {
       message: "Posts fetched successfully",
       total: posts.length,
       actualTotal: totalPosts,
@@ -69,9 +72,11 @@ module.exports = async function postList(req, res, next) {
           comments: post.comments,
         };
       }),
-    });
+    };
+    res.status(200);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({ Error: "Internal Server Error" });
   }
+  next();
 };
