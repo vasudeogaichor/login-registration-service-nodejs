@@ -16,7 +16,7 @@ module.exports = async function handleLikes(req, res, next) {
         await post.save();
       }
 
-      return res.status(201).json({
+      res.locals.json = {
         message: "Like added successfully",
         data: {
           postId: post._id,
@@ -25,7 +25,8 @@ module.exports = async function handleLikes(req, res, next) {
           likes: post.likes,
           comments: post.comments,
         },
-      });
+      };
+      res.status(201);
     } else if (action === "remove" && userId) {
       const userLikeIndex = post.likes.indexOf(userId);
 
@@ -33,7 +34,7 @@ module.exports = async function handleLikes(req, res, next) {
         post.likes.splice(userLikeIndex, 1);
         await post.save();
 
-        return res.status(201).json({
+        res.locals.json = {
           message: "Like removed successfully",
           data: {
             postId: post._id,
@@ -42,12 +43,13 @@ module.exports = async function handleLikes(req, res, next) {
             likes: post.likes,
             comments: post.comments,
           },
+        };
+        res.status(201);
+      } else {
+        return res.status(400).json({
+          message: "Error: Like already removed/ does not exist",
         });
       }
-
-      return res.status(400).json({
-        message: "Error: Like already removed/ does not exist"
-      })
     } else {
       return res.status(400).json({
         message: "Error: Wrong action type or userId missing",
@@ -56,4 +58,6 @@ module.exports = async function handleLikes(req, res, next) {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+
+  next();
 };

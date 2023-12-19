@@ -11,7 +11,7 @@ module.exports = async function postUpdate(req, res, next) {
       { new: true }
     );
 
-    res.status(201).json({
+    res.locals.json = {
       message: "Post updated successfully",
       data: {
         postId: updatePost._id,
@@ -20,8 +20,11 @@ module.exports = async function postUpdate(req, res, next) {
         likes: updatePost.likes,
         comments: updatePost.comments,
       },
-    });
+    };
+    res.status(201);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+
+  next();
 };
