@@ -1,10 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+
 const { postRouter, authRouter } = require('./routes');
 const {verifyToken} = require('./middleware/authMiddleware')
 
 const app = express();
+app.use(cors());
+
 const PORT = process.env.PORT || 3002;
 
 app.use(bodyParser.json());
