@@ -14,7 +14,7 @@ module.exports = async function handleComments(req, res, next) {
       post.comments.push({ userId, text });
       await post.save();
 
-      return res.status(201).json({
+      res.locals.json = {
         message: "Comment added successfully",
         data: {
           postId: post._id,
@@ -23,7 +23,8 @@ module.exports = async function handleComments(req, res, next) {
           likes: post.likes,
           comments: post.comments,
         },
-      });
+      };
+      res.status(201);
     } else if (action === "remove" && commentId) {
       const commentIndex = post.comments.findIndex((comment) =>
         comment._id.equals(commentId)
@@ -32,7 +33,7 @@ module.exports = async function handleComments(req, res, next) {
       if (commentIndex !== -1) {
         post.comments.splice(commentIndex, 1);
         await post.save();
-        return res.status(201).json({
+        res.locals.json = {
           message: "Comment removed successfully",
           data: {
             postId: post._id,
@@ -41,7 +42,8 @@ module.exports = async function handleComments(req, res, next) {
             likes: post.likes,
             comments: post.comments,
           },
-        });
+        };
+        res.status(201);
       } else {
         return res.status(404).json({ message: "Comment not found" });
       }
@@ -51,4 +53,6 @@ module.exports = async function handleComments(req, res, next) {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+
+  next();
 };
