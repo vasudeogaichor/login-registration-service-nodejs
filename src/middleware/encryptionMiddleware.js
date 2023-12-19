@@ -14,10 +14,24 @@ function encryptResponseData(req, res, next) {
   next();
 }
 
+function decryptRequestData(req, res, next) {
+  const encryptedData = req.body.encryptedRequestBody;
+  const key = Buffer.from(KEY, "base64");
+  const iv = Buffer.from(IV, "base64");
+
+  const decipher = crypto.createDecipheriv("aes-256-cbc", key, iv);
+  let decryptedData = decipher.update(encryptedData, "hex", "utf-8");
+  decryptedData += decipher.final("utf-8");
+
+  req.body = JSON.parse(decryptedData);
+  next();
+}
+
 function sendEncryptedResponse(req, res) {
   res.json(res.locals.encryptedResponse);
 }
 module.exports = {
   encryptResponseData,
   sendEncryptedResponse,
+  decryptRequestData,
 };
