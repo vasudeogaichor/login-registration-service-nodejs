@@ -1,10 +1,7 @@
 {
 	"info": {
-		"_postman_id": "31b58a5f-5254-4e47-9312-d80b9eb8f646",
 		"name": "Login and Registration Service",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23542327",
-		"_collection_link": "https://crimson-flare-843525.postman.co/workspace/ARTs~18e5b294-bcb8-4cea-b789-4ff451eab42c/collection/23542327-31b58a5f-5254-4e47-9312-d80b9eb8f646?action=share&source=collection_link&creator=23542327"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -49,7 +46,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"testuser1\",\n    \"password\": \"testUser1*\"\n}",
+							"raw": "{\n    \"username\": \"testuser4\",\n    \"password\": \"testUser1*\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -57,12 +54,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/auth/login",
+							"raw": "http://localhost:3002/auth/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"auth",
 								"login"
@@ -86,12 +83,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/auth/forgot-password",
+							"raw": "http://localhost:3002/auth/forgot-password",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"auth",
 								"forgot-password"
@@ -115,12 +112,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/auth/reset-password",
+							"raw": "http://localhost:3002/auth/reset-password",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"auth",
 								"reset-password"
@@ -155,12 +152,12 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:3000/posts/:post_id/comments",
+											"raw": "http://localhost:3002/posts/:post_id/comments",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "3000",
+											"port": "3002",
 											"path": [
 												"posts",
 												":post_id",
@@ -196,12 +193,12 @@
 											}
 										},
 										"url": {
-											"raw": "http://localhost:3000/posts/:post_id/likes",
+											"raw": "http://localhost:3002/posts/:post_id/likes",
 											"protocol": "http",
 											"host": [
 												"localhost"
 											],
-											"port": "3000",
+											"port": "3002",
 											"path": [
 												"posts",
 												":post_id",
@@ -225,12 +222,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3000/posts/:post_id",
+									"raw": "http://localhost:3002/posts/:post_id",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "3000",
+									"port": "3002",
 									"path": [
 										"posts",
 										":post_id"
@@ -260,12 +257,12 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/posts/:post_id",
+									"raw": "http://localhost:3002/posts/:post_id",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "3000",
+									"port": "3002",
 									"path": [
 										"posts",
 										":post_id"
@@ -286,12 +283,12 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3000/posts/:post_id",
+									"raw": "http://localhost:3002/posts/:post_id",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "3000",
+									"port": "3002",
 									"path": [
 										"posts",
 										":post_id"
@@ -323,12 +320,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/posts/",
+							"raw": "http://localhost:3002/posts/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"posts",
 								""
@@ -340,30 +337,42 @@
 				{
 					"name": "posts",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTgwOTcxYTI1ZjhiOGIwMzYzMjA3ZGYiLCJ1c2VybmFtZSI6InRlc3R1c2VyNCIsImlhdCI6MTcwMjkyNjM5MSwiZXhwIjoxNzAyOTI5OTkxfQ.imReNTz3nBVAVb3Cc_LFdgPu2Dmi71gD3pqQ9T3CTZ0",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/posts?limit=25&page=1&userId=657ab0418c7af2bceb1f00d8",
+							"raw": "http://localhost:3002/posts",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3002",
 							"path": [
 								"posts"
 							],
 							"query": [
 								{
 									"key": "limit",
-									"value": "25"
+									"value": "5",
+									"disabled": true
 								},
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"disabled": true
 								},
 								{
 									"key": "query",
-									"value": "updated",
+									"value": "is simply dummy text ",
 									"disabled": true
 								},
 								{
@@ -373,7 +382,8 @@
 								},
 								{
 									"key": "userId",
-									"value": "657ab0418c7af2bceb1f00d8"
+									"value": "657b082fd8e634b836c6af35",
+									"disabled": true
 								}
 							]
 						}
