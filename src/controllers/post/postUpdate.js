@@ -20,6 +20,7 @@ module.exports = async function postUpdate(req, res, next) {
         content: updatePost.content,
         likes: updatePost.likes,
         comments: updatePost.comments,
+        createdAt: post.createdAt,
       },
     });
   } catch (error) {

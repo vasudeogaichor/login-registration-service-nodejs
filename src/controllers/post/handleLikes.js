@@ -33,6 +33,7 @@ module.exports = async function handleLikes(req, res, next) {
           content: post.content,
           likes: post.likes,
           comments: post.comments,
+          createdAt: post.createdAt,
         },
       });
     } else if (action === "remove" && userId) {
@@ -50,6 +51,7 @@ module.exports = async function handleLikes(req, res, next) {
             content: post.content,
             likes: post.likes,
             comments: post.comments,
+            createdAt: post.createdAt,
           },
         });
       }

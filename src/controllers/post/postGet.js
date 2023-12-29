@@ -15,6 +15,7 @@ module.exports = async function postCreate(req, res, next) {
         content: post.content,
         likes: post.likes,
         comments: post.comments,
+        createdAt: post.createdAt,
       },
     });
   } catch (error) {

@@ -4,9 +4,11 @@ module.exports = async function postCreate(req, res, next) {
   let { userId, content, title } = req.body;
   const loggedInUser = req.user;
   if (userId && loggedInUser.userId !== userId) {
-    return res.status(500).json({ Error: "User id mismatch with logged in user" });
+    return res
+      .status(500)
+      .json({ Error: "User id mismatch with logged in user" });
   } else {
-    userId = loggedInUser.userId
+    userId = loggedInUser.userId;
   }
 
   try {
@@ -24,6 +26,7 @@ module.exports = async function postCreate(req, res, next) {
         userId: post.userId,
         title: post.title,
         content: post.content,
+        createdAt: post.createdAt,
       },
     });
   } catch (error) {

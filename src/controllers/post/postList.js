@@ -68,6 +68,7 @@ module.exports = async function postList(req, res, next) {
           content: post.content,
           likes: post.likes,
           comments: post.comments,
+          createdAt: post.createdAt
         };
       }),
     });
