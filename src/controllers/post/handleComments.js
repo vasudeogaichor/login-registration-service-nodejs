@@ -8,11 +8,15 @@ module.exports = async function handleComments(req, res, next) {
       return res.status(404).json({ message: "Post not found" });
     }
 
-    const { userId, text, action, commentId } = req.body;
+    let { userId, text, action, commentId } = req.body;
 
     const loggedInUser = req.user;
-    if (loggedInUser.userId !== userId) {
-      return res.status(500).json({ Error: "User id mismatch with logged in user" });
+    if (userId && loggedInUser.userId !== userId) {
+      return res
+        .status(500)
+        .json({ Error: "User id mismatch with logged in user" });
+    } else {
+      userId = loggedInUser.userId;
     }
 
     if (action === "add") {

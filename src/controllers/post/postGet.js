@@ -11,6 +11,7 @@ module.exports = async function postCreate(req, res, next) {
       data: {
         postId: post._id,
         userId: post.userId,
+        title: post.title,
         content: post.content,
         likes: post.likes,
         comments: post.comments,

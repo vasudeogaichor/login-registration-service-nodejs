@@ -9,6 +9,7 @@ const postSchema = new Schema(
       ref: "User",
       required: true,
     },
+    title: { type: String, required: true},
     content: { type: String, required: true },
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // User ids of users
     comments: [

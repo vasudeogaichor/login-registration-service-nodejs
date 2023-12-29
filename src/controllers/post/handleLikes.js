@@ -3,13 +3,15 @@ const Post = require("../../models/Post");
 module.exports = async function handleLikes(req, res, next) {
   try {
     const { postId } = req.params;
-    const { userId, action } = req.body;
+    let { userId, action } = req.body;
 
     const loggedInUser = req.user;
-    if (loggedInUser.userId !== userId) {
+    if (userId && loggedInUser.userId !== userId) {
       return res
         .status(500)
         .json({ Error: "User id mismatch with logged in user" });
+    } else {
+      userId = loggedInUser.userId;
     }
 
     const post = await Post.findById(postId);

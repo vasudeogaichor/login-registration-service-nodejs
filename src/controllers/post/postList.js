@@ -64,6 +64,7 @@ module.exports = async function postList(req, res, next) {
         return {
           postId: post._id,
           userId: post.userId,
+          title: post.title,
           content: post.content,
           likes: post.likes,
           comments: post.comments,
