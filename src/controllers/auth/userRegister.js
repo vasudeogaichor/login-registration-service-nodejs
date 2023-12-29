@@ -1,5 +1,6 @@
 const User = require("../../models/User");
 const { isStrongPassword } = require("../../utils/password");
+const { createNewToken } = require("../../middleware/authMiddleware");
 
 module.exports = async function userRegister(req, res, next) {
   const { username, email, password } = req.body;
@@ -27,6 +28,9 @@ module.exports = async function userRegister(req, res, next) {
     // Save the user to the database
     await newUser.save();
 
+    // Generate auth token so user can be logged in
+    const token = createNewToken(newUser);
+
     // Respond with a success message
     res.status(201).json({
       message: "User registered successfully.",
@@ -34,6 +38,7 @@ module.exports = async function userRegister(req, res, next) {
         userId: newUser._id,
         username: newUser.username,
         email: newUser.email,
+        token: token
       },
     });
   } catch (error) {
