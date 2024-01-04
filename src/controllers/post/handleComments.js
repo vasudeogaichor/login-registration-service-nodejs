@@ -26,7 +26,7 @@ module.exports = async function handleComments(req, res, next) {
       return res.status(201).json({
         message: "Comment added successfully",
         data: {
-          postId: post._id,
+          id: post._id,
           userId: post.userId,
           content: post.content,
           likes: post.likes,
@@ -45,7 +45,7 @@ module.exports = async function handleComments(req, res, next) {
         return res.status(201).json({
           message: "Comment removed successfully",
           data: {
-            postId: post._id,
+            id: post._id,
             userId: post.userId,
             content: post.content,
             likes: post.likes,

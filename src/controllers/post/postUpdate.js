@@ -14,7 +14,7 @@ module.exports = async function postUpdate(req, res, next) {
     res.status(201).json({
       message: "Post updated successfully",
       data: {
-        postId: updatePost._id,
+        id: updatePost._id,
         userId: updatePost.userId,
         title: updatePost.title,
         content: updatePost.content,

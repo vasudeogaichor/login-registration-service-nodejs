@@ -9,7 +9,7 @@ module.exports = async function postCreate(req, res, next) {
     res.status(200).json({
       message: "Post fetched successfully",
       data: {
-        postId: post._id,
+        id: post._id,
         userId: post.userId,
         title: post.title,
         content: post.content,

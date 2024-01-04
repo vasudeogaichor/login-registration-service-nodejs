@@ -22,7 +22,7 @@ module.exports = async function postCreate(req, res, next) {
     res.status(201).json({
       message: "Post created successfully.",
       data: {
-        postId: post._id,
+        id: post._id,
         userId: post.userId,
         title: post.title,
         content: post.content,

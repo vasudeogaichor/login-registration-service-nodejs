@@ -62,7 +62,7 @@ module.exports = async function postList(req, res, next) {
       actualTotal: totalPosts,
       data: posts.map((post) => {
         return {
-          postId: post._id,
+          id: post._id,
           userId: post.userId,
           title: post.title,
           content: post.content,

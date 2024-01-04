@@ -28,7 +28,7 @@ module.exports = async function handleLikes(req, res, next) {
       return res.status(201).json({
         message: "Like added successfully",
         data: {
-          postId: post._id,
+          id: post._id,
           userId: post.userId,
           content: post.content,
           likes: post.likes,
@@ -46,7 +46,7 @@ module.exports = async function handleLikes(req, res, next) {
         return res.status(201).json({
           message: "Like removed successfully",
           data: {
-            postId: post._id,
+            id: post._id,
             userId: post.userId,
             content: post.content,
             likes: post.likes,
