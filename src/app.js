@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 require('express-async-errors');
 
-const { postRouter, authRouter } = require('./routes');
+const { authRouter } = require('./routes');
 const {verifyToken} = require('./middleware/authMiddleware')
 
 const app = express();
@@ -16,7 +16,6 @@ app.use(bodyParser.json());
 
 app.use('/auth', authRouter);
 app.use(verifyToken)
-app.use('/posts', postRouter);
 
 
 app.use((err, req, res, next) => {
